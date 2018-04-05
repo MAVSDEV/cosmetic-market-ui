@@ -1728,3 +1728,7 @@ article.single-post p {
 .top-to a:hover {
   text-decoration: none;
 }
+
+.row{
+  width: 100%;
+}

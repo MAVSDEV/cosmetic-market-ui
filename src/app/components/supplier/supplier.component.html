@@ -11,7 +11,7 @@
         <div class="buttons">
           <button class="pull-right" (click)="onCreateForm()">+</button>
         </div>
-        <router-outlet></router-outlet>
+        <app-products-table></app-products-table>
       </div>
     </div>
     <!-- Row End -->
@@ -29,52 +29,53 @@
           <div class="form-horizontal col-lg-12">
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label pull-left">Name:</label>
-              <div class="col-md-6 col-xs-12">
+              <label class="col-md-3 col-xs-12 control-label pull-left">Наименование:</label>
+              <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="name" title="" required>
                 </div>
-                <span class="help-block">Enter product name</span>
+                <span class="help-block">Введите наименование продука</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('name').valid
           && formErrors.name">{{ formErrors.name }}</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label pull-left">Description:</label>
-              <div class="col-md-6 col-xs-12">
+              <label class="col-md-3 col-xs-12 control-label pull-left">Описание:</label>
+              <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="description" title="" required>
                 </div>
-                <span class="help-block">Enter description</span>
+                <span class="help-block">Введите описание</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('description').valid
            && formErrors.description">{{ formErrors.description }}</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Category:</label>
-              <div class="col-md-6 col-xs-12">
+              <label class="col-md-3 col-xs-12 control-label">Категория:</label>
+              <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="category" title="" required>
                 </div>
-                <span class="help-block">Enter category</span>
+                <span class="help-block">Выберите категорию</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('category').valid
           && formErrors.category">{{ formErrors.category }}</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Price:</label>
-              <div class="col-md-6 col-xs-12">
+              <label class="col-md-3 col-xs-12 control-label">Cтоимость:</label>
+              <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                  <input type="text" class="form-control" formControlName="price" title="" required>
+                  <input type="number" class="form-control" formControlName="price" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 188 || event.keyCode == 190
+                    || event.keyCode == 194 || event.keyCode == 110? false : true" required>
                 </div>
-                <span class="help-block">Enter price</span>
+                <span class="help-block">Введите стоимость</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('price').valid
           && formErrors.price">{{ formErrors.price }}</div>
               </div>
@@ -82,12 +83,12 @@
 
           </div>
         </form>
-
-        <div>
-          <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
-          <button class="btn btn-default btn-lg btn-logout" data-dismiss="modal">Cancel</button>
-        </div>
       </div>
+
+    </div>
+    <div>
+      <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
+      <button class="btn btn-default" data-dismiss="modal">Cancel</button>
     </div>
   </div>
 </div>

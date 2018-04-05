@@ -1,18 +1,13 @@
-<div class="widget dashboard-container my-adslist">
-          <h3 class="widget-header">My Ads</h3>
-          <table class="table table-responsive product-dashboard-table">
-            <thead>
-            <tr>
-              <th>Image</th>
-              <th>Product Title</th>
-              <th class="text-center">Category</th>
-              <th class="text-center">Action</th>
-            </tr>
-            </thead>
-            <tbody>
-              <tr app-product-record></tr>
-            </tbody>
-          </table>
-        </div>
-<app-pagination></app-pagination>
+<div style="width: 100%">
+  <div class="table-responsive">
+    <table class="table table-striped  table-hover">
+    </table>
+  </div>
+</div>
+
+<div *ngIf="selectedId">
+  <button (click)="onDelete(selectedId)">Delete</button>
+  <button (click)="onEdit(selectedId)">Edit</button>
+</div>
+
 
