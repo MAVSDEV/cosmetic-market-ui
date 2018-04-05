@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {ReactiveFormsBaseClass} from '../shared/classes/reactive-forms.base.class';
+import { ReactiveFormsBaseClass } from '../shared/classes/reactive-forms.base.class';
 
 declare var $: any;
 

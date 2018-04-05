@@ -1211,6 +1211,13 @@ ul.pagination .active a {
   letter-spacing: 0;
   color: #848484;
 }
+form{
+  padding: 5%;
+}
+
+.form-group{
+  display: flex;
+}
 
 .widget.personal-info .form-group i, .widget.change-password .form-group i, .widget.change-email .form-group i {
   color: white;
@@ -1740,8 +1747,7 @@ article.single-post p {
 
 
 .message-box .mb-container {
-  position: absolute;
-  left: 0px;
+  margin: auto;
   top: 10%;
   background: rgba(255, 255, 255, 1);
   padding: 20px;

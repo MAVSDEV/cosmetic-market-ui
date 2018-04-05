@@ -20,10 +20,15 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
+        "../node_modules/datatables.net-select-bs/css/select.bootstrap.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/popper.js/dist/umd/popper.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.js",
         "../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
         "../node_modules/jquery.easing/jquery.easing.min.js",
         "../node_modules/jquery.scrollto/jquery.scrollTo.min.js",
@@ -32,7 +37,10 @@
         "../src/assets/libs/js/iphone-inline-video/iphone-inline-video.js",
         "../src/assets/libs/js/vide/jquery.vide.js",
         "../src/assets/libs/js/background-video.js",
-        "../src/assets/libs/js/custom.js"
+        "../src/assets/libs/js/custom.js",
+        "../node_modules/datatables.net/js/jquery.dataTables.js",
+        "../node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
+        "../node_modules/datatables.net-select/js/dataTables.select.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
