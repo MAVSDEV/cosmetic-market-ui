@@ -22,8 +22,8 @@
       "styles": [
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
-        "../node_modules/datatables.net-bs/css/dataTables.bootstrap.css",
-        "../node_modules/datatables.net-select-bs/css/select.bootstrap.css"
+        "../src/assets/libs/js/datatables/datatables.net-bs/css/dataTables.bootstrap.css",
+        "../src/assets/libs/js/datatables/datatables.net-select-bs/css/select.bootstrap.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -38,9 +38,9 @@
         "../src/assets/libs/js/vide/jquery.vide.js",
         "../src/assets/libs/js/background-video.js",
         "../src/assets/libs/js/custom.js",
-        "../node_modules/datatables.net/js/jquery.dataTables.js",
-        "../node_modules/datatables.net-bs/js/dataTables.bootstrap.js",
-        "../node_modules/datatables.net-select/js/dataTables.select.js"
+        "../src/assets/libs/js/datatables/datatables.net/js/jquery.dataTables.js",
+        "../src/assets/libs/js/datatables/datatables.net-bs/js/dataTables.bootstrap.js",
+        "../src/assets/libs/js/datatables/datatables.net-select/js/dataTables.select.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

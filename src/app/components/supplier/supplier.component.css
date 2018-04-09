@@ -1792,3 +1792,9 @@ article.single-post p {
   text-align: center;
   min-width: 36px;
 }
+
+.form-group input[type='file']{
+  border: none;
+  padding: 0;
+  color: black;
+}

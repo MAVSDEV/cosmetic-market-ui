@@ -12,13 +12,15 @@ declare var $: any;
 export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit {
 
   productForm: FormGroup;
+  photo: object;
 
   constructor(private fb: FormBuilder) {
     super({
       name: '',
       category: '',
       price: '',
-      description: ''
+      description: '',
+      photo: ''
     }, {
       name: {
         required: 'Name is required.'
@@ -44,7 +46,7 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
       name: ['', [Validators.required]],
       category: ['', [Validators.required]],
       price: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      description: ['', [Validators.required]]
     });
 
     this.productForm.valueChanges.subscribe(data => this.onValueChanged(this.productForm, data));
@@ -52,15 +54,19 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   }
 
   onAddNewProduct() {
-    if (!this.productForm.valid) {
+    if (!this.productForm.valid || !this.photo) {
       alert('Login data is invalid, please check it.');
       return;
     }
     const formObject = this.productForm.value;
-    console.log(formObject);
+    console.log(formObject, this.photo);
   }
 
   onCreateForm() {
     $('#addProduct').modal('show');
+  }
+
+  onFileChange(event) {
+    this.photo = event.target.files[0];
   }
 }
