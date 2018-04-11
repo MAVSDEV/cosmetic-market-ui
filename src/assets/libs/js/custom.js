@@ -55,6 +55,7 @@
 			event.preventDefault();
 		});
 
+		initS3FileUpload($('#fileInput'));
 	});
 
 })(jQuery);
