@@ -1798,3 +1798,7 @@ article.single-post p {
   padding: 0;
   color: black;
 }
+
+#addProduct .modal-content {
+  width: 700px;
+}

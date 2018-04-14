@@ -62,10 +62,6 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
     console.log(formObject, this.photo);
   }
 
-  onCreateForm() {
-    $('#addProduct').modal('show');
-  }
-
   onFileChange(event) {
     this.photo = event.target.files[0];
   }

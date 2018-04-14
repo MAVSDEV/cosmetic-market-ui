@@ -9,7 +9,8 @@
 
       <div class="col-md-12 col-lg-12">
         <div class="buttons">
-          <button class="pull-right" (click)="onCreateForm()">+</button>
+          <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                  data-target="#addProduct">+</button>
         </div>
         <app-products-table></app-products-table>
       </div>
@@ -19,20 +20,20 @@
   <!-- Container End -->
 </section>
 
-<div id="addProduct" class="modal message-box animated fade" role="dialog">
-  <div class="mb-container col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2
-  col-sm-8 col-sm-offset-2  col-xs-8 col-xs-offset-2">
-    <div>
-      <div class="mb-content">
+<!-- The Modal -->
+<div class="modal fade " id="addProduct">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-        <!--image-->
-        <p>Image: </p>
-        <form>
-          <input id="fileInput" type="file" name="file" />
-        </form>
-        <!--image-->
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Создать продукт</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-        <h3 style="text-align: center">Создать продукт:</h3>
+      <!-- Modal body -->
+      <div class="modal-body">
+
         <form [formGroup]="productForm">
           <div class="form-horizontal col-lg-12">
 
@@ -40,7 +41,7 @@
               <label class="col-md-3 col-xs-12 control-label pull-left">Фото:</label>
               <div class="col-md-7 col-xs-12">
                 <input type="file" class="form-control input-button" title="" required
-                (change)="onFileChange($event)">
+                       (change)="onFileChange($event)">
               </div>
             </div>
 
@@ -101,10 +102,12 @@
         </form>
       </div>
 
-    </div>
-    <div>
-      <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
-      <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
+      </div>
+
     </div>
   </div>
 </div>
