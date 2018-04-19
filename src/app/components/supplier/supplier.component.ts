@@ -124,17 +124,17 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   }
 
   onAddNewProduct(productData) {
-    let formData = new FormData();
-    formData.append('imageFile', this.photo);
+    let imageData:FormData = new FormData();
+    imageData.append('imageFile', this.photo);
 
     this.productService.addProduct(productData)
       .subscribe(result => {
-          this.activeType = null;
-          // this.productService.addPhotoToProduct(result.id, imageData)
-          //   .subscribe(result => {
-          //     console.log(result);
-          //   }
-          // );
+          console.log(result);
+          this.productService.addPhotoToProduct(result.id, imageData)
+            .subscribe(result => {
+                console.log(result);
+              }
+            );
         }
       );
   }

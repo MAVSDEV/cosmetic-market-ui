@@ -40,7 +40,6 @@
         "../src/assets/libs/js/iphone-inline-video/iphone-inline-video.js",
         "../src/assets/libs/js/vide/jquery.vide.js",
         "../src/assets/libs/js/background-video.js",
-        "../src/assets/libs/js/aws-client.js",
         "../src/assets/libs/js/custom.js",
         "../src/assets/libs/js/datatables/datatables.net/js/jquery.dataTables.js",
         "../src/assets/libs/js/datatables/datatables.net-bs/js/dataTables.bootstrap.js",

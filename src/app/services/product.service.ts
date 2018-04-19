@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import { Product } from '../models/product';
 
@@ -68,8 +68,14 @@ export class ProductService extends BaseService {
   /** PUT: add image to the product on the server */
   addPhotoToProduct (id: number, file: any): Observable<any> {
     const url = `${this.productsUrl}/${id}/image`;
-    return this.http.put(url, file, httpOptions).pipe(
-      tap(_ => this.log(`added image to product id=${id}`)),
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.append('Content-Type', 'false');
+    httpHeaders.append('processData', 'false');
+    let headers = { headers: httpHeaders };
+
+    return this.http.put(url, file, headers).pipe(
+      tap(_ => this.log(`added image to product!`)),
       catchError(this.handleError<any>('addedPhotoProduct'))
     );
   }
