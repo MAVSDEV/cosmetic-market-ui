@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit} from '@angular/core';
+import {ProductService} from "../../../services/product.service";
 declare var $: any;
 
 @Component({
@@ -12,17 +13,12 @@ export class ProductsTableComponent implements OnInit {
   private productsTable: any;
   public selectedId: any;
 
-  constructor(private el: ElementRef) {
-    this.listOfProducts = [{name: 'Name1', description: 'Description1', category: 'category1', price: 'price1'},
-      {name: 'Name2', description: 'Description1', category: 'category1', price: 'price1'},
-      {name: 'Name3', description: 'Description1', category: 'category1', price: 'price1'},
-      {name: 'Name4', description: 'Description1', category: 'category1', price: 'price1'},
-      {name: 'Name5', description: 'Description1', category: 'category1', price: 'price1'},
-      {name: 'Name6', description: 'Description1', category: 'category1', price: 'price1'}]
-  }
+  constructor(private el: ElementRef, private productService: ProductService) {}
 
   ngOnInit() {
-    this.loadProductsTable();
+    this.getProducts(() => {
+      this.loadProductsTable();
+    })
   }
 
   public loadProductsTable(): void {
@@ -32,14 +28,19 @@ export class ProductsTableComponent implements OnInit {
     const tableOptions: any = {
       data: this.listOfProducts,
       responsive: true,
-      lengthMenu: [5, 10, 15],
+      lengthMenu: [3, 5, 10],
       select: true,
       paging: true,
       columns: [
-        {title: 'Photo', data: 'name'},
+        {title: 'Photo',
+          data: 'mainImage',
+          'bSortable': false,
+          'mRender': function (data) {
+            return '<img style="height: 80px; width: auto;" src="' + data + '" />';
+          }},
         {title: 'Name', data: 'name'},
-        {title: 'Description', data: 'description'},
-        {title: 'Category', data: 'category'},
+        {title: 'Description', data: 'briefDescription'},
+        {title: 'Category', data: 'productCategory.name'},
         {title: 'Price', data: 'price'}
       ]
     };
@@ -51,6 +52,15 @@ export class ProductsTableComponent implements OnInit {
     this.tableWidget.on('deselect', (e, dt, type, indexes) => {
       this.selectedId = null;
     });
+  }
+
+  getProducts(callback): void {
+    this.productService.getProducts()
+      .subscribe(products => {
+        this.listOfProducts = products;
+          callback();
+        }
+      );
   }
 
   onDelete(id){

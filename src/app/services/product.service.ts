@@ -17,6 +17,7 @@ import {isDefined} from "../utils/utils";
 export class ProductService extends BaseService {
 
   private productsUrl = environment.apiBaseUrl + '/product/aloe';  // URL to web api
+  private productsSaveUrl = environment.apiBaseUrl + '/product/aloe/save';
 
   constructor(private http: HttpClient) {
     super();
@@ -40,8 +41,8 @@ export class ProductService extends BaseService {
   }
 
   /** POST: add a new product to the server */
-  addProduct (product: Product): Observable<Product> {
-    return this.http.post<Product>(this.productsUrl, product, httpOptions).pipe(
+  addProduct (product: any): Observable<any> {
+    return this.http.post<Product>(this.productsSaveUrl, product, httpOptions).pipe(
       tap((product: Product) => this.log(`added product w/ id=${product.id}`)),
       catchError(this.handleError<Product>('addProduct'))
     );
@@ -63,6 +64,15 @@ export class ProductService extends BaseService {
     return this.http.delete<Product>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted product id=${id}`)),
       catchError(this.handleError<Product>('deleteProduct'))
+    );
+  }
+
+  /** PUT: add image to the product on the server */
+  addPhotoToProduct (id: number, file: any): Observable<any> {
+    const url = `${this.productsUrl}/${id}/image`;
+    return this.http.put(url, file, httpOptions).pipe(
+      tap(_ => this.log(`added image to product id=${id}`)),
+      catchError(this.handleError<any>('addedPhotoProduct'))
     );
   }
 
@@ -109,9 +119,6 @@ export class FilterParams {
     if(isDefined(this.sortField) && isDefined(this.sortOrder)) {
       params = params.set("sort", `${this.sortField}[${this.sortOrder}]`);
     }
-
-    //this.categoryIds.forEach(categoryId => params
-    //  .append("categoryIds", String(categoryId)));
     return params;
   }
 }

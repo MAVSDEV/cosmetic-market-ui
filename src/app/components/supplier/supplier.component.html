@@ -3,13 +3,10 @@
   <div class="container">
     <!-- Row Start -->
     <div class="row">
-      <!--<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">-->
-        <!--<app-account-navigation></app-account-navigation>-->
-      <!--</div>-->
 
       <div class="col-md-12 col-lg-12">
         <div class="buttons">
-          <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+          <button id="button-create" type="button" class="btn btn-primary pull-right" data-toggle="modal"
                   data-target="#addProduct">+</button>
         </div>
         <app-products-table></app-products-table>
@@ -40,8 +37,7 @@
             <div class="form-group">
               <label class="col-md-3 col-xs-12 control-label pull-left">Фото:</label>
               <div class="col-md-7 col-xs-12">
-                <input type="file" class="form-control input-button" title="" required
-                       (change)="onFileChange($event)">
+                <input type="file" class="input-button" title="" (change)="onFileChange($event)">
               </div>
             </div>
 
@@ -72,15 +68,96 @@
             </div>
 
             <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Объем:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="volume" title="" required>
+                </div>
+                <span class="help-block">Введите объем</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('volume').valid
+          && formErrors.volume">{{ formErrors.volume }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-md-3 col-xs-12 control-label">Категория:</label>
               <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                  <input type="text" class="form-control" formControlName="category" title="" required>
+                  <select type="text" class="form-control" formControlName="category" title="" required>
+                    <option *ngFor="let category of categories"
+                            value="{{category.name}}">{{category.name}}</option>
+                  </select>
                 </div>
                 <span class="help-block">Выберите категорию</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('category').valid
           && formErrors.category">{{ formErrors.category }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Бренд:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="brand" title="" required>
+                </div>
+                <span class="help-block">Введите бренд</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('brand').valid
+          && formErrors.brand">{{ formErrors.brand }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Детали:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="details" title="" required>
+                </div>
+                <span class="help-block">Введите описание деталей</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('details').valid
+          && formErrors.details">{{ formErrors.details }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Акивные ингредиенты:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="activeIngredients" title="" required>
+                </div>
+                <span class="help-block">Введите активные ингредиенты</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('activeIngredients').valid
+          && formErrors.activeIngredients">{{ formErrors.activeIngredients }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Рекомендации:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="directions" title="" required>
+                </div>
+                <span class="help-block">Введите рекомендации</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('directions').valid
+          && formErrors.directions">{{ formErrors.directions }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Свойства:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="properties" title="" required>
+                </div>
+                <span class="help-block">Выберите свойства</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('properties').valid
+          && formErrors.properties">{{ formErrors.properties }}</div>
               </div>
             </div>
 
@@ -111,5 +188,3 @@
     </div>
   </div>
 </div>
-
-

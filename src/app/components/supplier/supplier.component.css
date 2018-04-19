@@ -1802,3 +1802,10 @@ article.single-post p {
 #addProduct .modal-content {
   width: 700px;
 }
+
+#button-create{
+  margin: 15px 10px;
+  background-color: #777777;
+  color: white;
+  border-color: #777777;
+}

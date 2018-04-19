@@ -23,7 +23,8 @@
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../src/assets/libs/js/datatables/datatables.net-bs/css/dataTables.bootstrap.css",
-        "../src/assets/libs/js/datatables/datatables.net-select-bs/css/select.bootstrap.css"
+        "../src/assets/libs/js/datatables/datatables.net-select-bs/css/select.bootstrap.css",
+        "../src/assets/libs/js/datatables/datatables.net-dt/css/jquery.dataTables.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
