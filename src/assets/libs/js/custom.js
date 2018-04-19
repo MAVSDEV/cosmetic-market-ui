@@ -54,7 +54,6 @@
 			}, 1500, 'easeInOutExpo');
 			event.preventDefault();
 		});
-
 	});
 
 })(jQuery);

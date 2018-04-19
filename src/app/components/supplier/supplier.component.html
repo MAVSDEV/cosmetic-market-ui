@@ -3,13 +3,11 @@
   <div class="container">
     <!-- Row Start -->
     <div class="row">
-      <!--<div class="col-md-10 offset-md-1 col-lg-4 offset-lg-0">-->
-        <!--<app-account-navigation></app-account-navigation>-->
-      <!--</div>-->
 
       <div class="col-md-12 col-lg-12">
         <div class="buttons">
-          <button class="pull-right" (click)="onCreateForm()">+</button>
+          <button id="button-create" type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                  data-target="#addProduct">+</button>
         </div>
         <app-products-table></app-products-table>
       </div>
@@ -19,20 +17,27 @@
   <!-- Container End -->
 </section>
 
-<div id="addProduct" class="modal message-box animated fade" role="dialog">
-  <div class="mb-container col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2
-  col-sm-8 col-sm-offset-2  col-xs-8 col-xs-offset-2">
-    <div>
-      <div class="mb-content">
-        <h3 style="text-align: center">Создать продукт:</h3>
+<!-- The Modal -->
+<div class="modal fade " id="addProduct">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Создать продукт</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+
         <form [formGroup]="productForm">
           <div class="form-horizontal col-lg-12">
 
             <div class="form-group">
               <label class="col-md-3 col-xs-12 control-label pull-left">Фото:</label>
               <div class="col-md-7 col-xs-12">
-                <input type="file" class="form-control input-button" title="" required
-                (change)="onFileChange($event)">
+                <input type="file" class="input-button" title="" (change)="onFileChange($event)">
               </div>
             </div>
 
@@ -63,15 +68,96 @@
             </div>
 
             <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Объем:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="volume" title="" required>
+                </div>
+                <span class="help-block">Введите объем</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('volume').valid
+          && formErrors.volume">{{ formErrors.volume }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
               <label class="col-md-3 col-xs-12 control-label">Категория:</label>
               <div class="col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                  <input type="text" class="form-control" formControlName="category" title="" required>
+                  <select type="text" class="form-control" formControlName="category" title="" required>
+                    <option *ngFor="let category of categories"
+                            value="{{category.name}}">{{category.name}}</option>
+                  </select>
                 </div>
                 <span class="help-block">Выберите категорию</span>
                 <div class="alert alert-danger" *ngIf="!productForm.get('category').valid
           && formErrors.category">{{ formErrors.category }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Бренд:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="brand" title="" required>
+                </div>
+                <span class="help-block">Введите бренд</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('brand').valid
+          && formErrors.brand">{{ formErrors.brand }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Детали:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="details" title="" required>
+                </div>
+                <span class="help-block">Введите описание деталей</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('details').valid
+          && formErrors.details">{{ formErrors.details }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Акивные ингредиенты:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="activeIngredients" title="" required>
+                </div>
+                <span class="help-block">Введите активные ингредиенты</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('activeIngredients').valid
+          && formErrors.activeIngredients">{{ formErrors.activeIngredients }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Рекомендации:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="directions" title="" required>
+                </div>
+                <span class="help-block">Введите рекомендации</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('directions').valid
+          && formErrors.directions">{{ formErrors.directions }}</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-3 col-xs-12 control-label">Свойства:</label>
+              <div class="col-md-7 col-xs-12">
+                <div class="input-group">
+                  <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                  <input type="text" class="form-control" formControlName="properties" title="" required>
+                </div>
+                <span class="help-block">Выберите свойства</span>
+                <div class="alert alert-danger" *ngIf="!productForm.get('properties').valid
+          && formErrors.properties">{{ formErrors.properties }}</div>
               </div>
             </div>
 
@@ -93,10 +179,12 @@
         </form>
       </div>
 
-    </div>
-    <div>
-      <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
-      <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
+      </div>
+
     </div>
   </div>
 </div>

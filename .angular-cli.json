@@ -23,7 +23,8 @@
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../src/assets/libs/js/datatables/datatables.net-bs/css/dataTables.bootstrap.css",
-        "../src/assets/libs/js/datatables/datatables.net-select-bs/css/select.bootstrap.css"
+        "../src/assets/libs/js/datatables/datatables.net-select-bs/css/select.bootstrap.css",
+        "../src/assets/libs/js/datatables/datatables.net-dt/css/jquery.dataTables.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -34,6 +35,8 @@
         "../node_modules/jquery.scrollto/jquery.scrollTo.min.js",
         "../node_modules/owl.carousel/dist/owl.carousel.min.js",
         "../node_modules/wowjs/dist/wow.min.js",
+        "../src/assets/libs/js/jquery-ui.min.js",
+        "../node_modules/blueimp-file-upload/js/jquery.fileupload.js",
         "../src/assets/libs/js/iphone-inline-video/iphone-inline-video.js",
         "../src/assets/libs/js/vide/jquery.vide.js",
         "../src/assets/libs/js/background-video.js",
