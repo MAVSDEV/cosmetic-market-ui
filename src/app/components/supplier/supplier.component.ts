@@ -14,7 +14,7 @@ declare var $: any;
 export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit {
 
   productForm: FormGroup;
-  photo: object;
+  photo: any;
   categories: Array<object>;
 
   constructor(private fb: FormBuilder, private productService: ProductService,
@@ -119,16 +119,16 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
     };
     console.log(this.photo);
     let imageData:FormData = new FormData();
-    // imageData.append('imageFile', this.photo, this.photo['name']);
+    imageData.append('imageFile', this.photo);
 
     this.productService.addProduct(newProductObj)
       .subscribe(result => {
           console.log(result);
-          // this.productService.addPhotoToProduct(result.id, imageData)
-          //   .subscribe(result => {
-          //     console.log(result);
-          //   }
-          // );
+          this.productService.addPhotoToProduct(result.id, imageData)
+            .subscribe(result => {
+              console.log(result);
+            }
+          );
         }
       );
 
