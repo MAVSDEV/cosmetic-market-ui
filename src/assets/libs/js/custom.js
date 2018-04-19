@@ -54,8 +54,6 @@
 			}, 1500, 'easeInOutExpo');
 			event.preventDefault();
 		});
-
-		initS3FileUpload($('#fileInput'));
 	});
 
 })(jQuery);
