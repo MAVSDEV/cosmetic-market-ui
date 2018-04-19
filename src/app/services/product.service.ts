@@ -57,10 +57,8 @@ export class ProductService extends BaseService {
   }
 
   /** DELETE: delete the product from the server */
-  deleteProduct (product: Product | number): Observable<Product> {
-    const id = typeof product === 'number' ? product : product.id;
-    const url = `${this.productsUrl}/${id}`;
-
+  deleteProduct (id: number): Observable<any> {
+    const url = `${this.productsUrl}/delete/${id}`;
     return this.http.delete<Product>(url, httpOptions).pipe(
       tap(_ => this.log(`deleted product id=${id}`)),
       catchError(this.handleError<Product>('deleteProduct'))

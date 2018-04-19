@@ -14,8 +14,10 @@ declare var $: any;
 export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit {
 
   productForm: FormGroup;
-  photo: object;
+  photo: any;
   categories: Array<object>;
+  activeType: string | null;
+  productIdForDelete: number | null;
 
   constructor(private fb: FormBuilder, private productService: ProductService,
               private categoryService: CategoryService) {
@@ -95,7 +97,7 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
       );
   }
 
-  onAddNewProduct() {
+  onSave(){
     if (!this.productForm.valid || !this.photo) {
       alert('Login data is invalid, please check it.');
       return;
@@ -117,13 +119,17 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
         name: formObject.category
       }
     };
-    console.log(this.photo);
-    let imageData:FormData = new FormData();
-    // imageData.append('imageFile', this.photo, this.photo['name']);
+    this.activeType == 'create' ? this.onAddNewProduct(newProductObj) : this.editProduct(newProductObj);
 
-    this.productService.addProduct(newProductObj)
+  }
+
+  onAddNewProduct(productData) {
+    let formData = new FormData();
+    formData.append('imageFile', this.photo);
+
+    this.productService.addProduct(productData)
       .subscribe(result => {
-          console.log(result);
+          this.activeType = null;
           // this.productService.addPhotoToProduct(result.id, imageData)
           //   .subscribe(result => {
           //     console.log(result);
@@ -131,11 +137,46 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
           // );
         }
       );
-
-    console.log(formObject, this.photo);
   }
 
   onFileChange(event) {
     this.photo = event.target.files[0];
+  }
+
+  getProductIdForDelete(id: number){
+    $('#messageBoxModal').modal('show');
+    this.productIdForDelete = id;
+  }
+
+  getProductData(data: object){
+    this.activeType = 'edit';
+    this.productForm.patchValue({
+      name: data['name'],
+      description: data['briefDescription'],
+      price: data['price'],
+      brand: data['brand'],
+      volume: data['volume'],
+      details: data['description']['details'],
+      activeIngredients: data['description']['activeIngredients'],
+      properties: data['description']['properties'],
+      directions: data['description']['directions'],
+      category: data['productCategory']['name']
+    });
+    $('#addProduct').modal('show');
+  }
+
+  editProduct(data){
+    console.log(data);
+  }
+
+  deleteProduct(){
+    console.log(this.productIdForDelete);
+    if(this.productIdForDelete){
+      this.productService.deleteProduct(this.productIdForDelete)
+        .subscribe(result => {
+          this.productIdForDelete = null;
+          });
+    }
+
   }
 }

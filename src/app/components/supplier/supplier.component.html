@@ -7,9 +7,10 @@
       <div class="col-md-12 col-lg-12">
         <div class="buttons">
           <button id="button-create" type="button" class="btn btn-primary pull-right" data-toggle="modal"
-                  data-target="#addProduct">+</button>
+                  data-target="#addProduct" (click)="activeType='create'">+</button>
         </div>
-        <app-products-table></app-products-table>
+        <app-products-table (deleteId)="getProductIdForDelete($event)"
+                            (editData)="getProductData($event)"></app-products-table>
       </div>
     </div>
     <!-- Row End -->
@@ -18,7 +19,7 @@
 </section>
 
 <!-- The Modal -->
-<div class="modal fade " id="addProduct">
+<div class="modal fade" id="addProduct">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -181,10 +182,31 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
-        <button class="btn btn-default btn-lg btn-logout" (click)="onAddNewProduct()">Add</button>
+        <button class="btn btn-default" data-dismiss="modal" (click)="activeType=null">Cancel</button>
+        <button class="btn btn-default btn-lg btn-logout" (click)="onSave()">Save</button>
       </div>
 
+    </div>
+  </div>
+</div>
+
+
+<div id="messageBoxModal" class="modal message-box animated fadeIn"
+     data-keyboard="false" data-backdrop="static" role="dialog">
+  <div class="mb-container">
+    <div class="mb-middle">
+      <div class="mb-content">
+        <p>Are you sure you want to delete it?</p>
+        <p>Press Yes if you want to continue work. Press No to close.</p>
+      </div>
+      <div class="mb-footer">
+        <div class="pull-right">
+          <a class="btn btn-yes" data-dismiss="modal"
+             (click)="deleteProduct()">Yes</a>
+          <button class="btn" data-dismiss="modal"
+          (click)="productIdForDelete=null">No</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

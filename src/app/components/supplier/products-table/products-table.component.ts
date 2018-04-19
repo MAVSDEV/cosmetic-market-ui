@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output} from '@angular/core';
 import {ProductService} from "../../../services/product.service";
 declare var $: any;
 
@@ -12,6 +12,9 @@ export class ProductsTableComponent implements OnInit {
   private tableWidget: any;
   private productsTable: any;
   public selectedId: any;
+
+  @Output() editData: EventEmitter<object> = new EventEmitter<object>();
+  @Output() deleteId: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(private el: ElementRef, private productService: ProductService) {}
 
@@ -64,11 +67,11 @@ export class ProductsTableComponent implements OnInit {
   }
 
   onDelete(id){
-    console.log('Deleted: ' + this.listOfProducts[id].name);
+    this.deleteId.emit(this.listOfProducts[id].id);
   }
 
   onEdit(id){
-    console.log('Updated: ' + this.listOfProducts[id].name);
+    this.editData.emit(this.listOfProducts[id]);
   }
 
 }
