@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product, ProductDescription} from "../../../../models/product";
+import {Product} from "../../../../models/product";
 import {InfoTab} from "./product-info-tab/product-info-tab.component";
 
 @Component({
@@ -20,13 +20,13 @@ export class ProductInfoComponent implements OnInit {
   }
 
   private prepareInfoTabs(): void {
-    this.pushIfDefined('Details',
+    this.pushIfDefined('Детали',
       this.product.description.details);
-    this.pushIfDefined('Active Ingredients',
+    this.pushIfDefined('Активные ингридиенты',
       this.product.description.activeIngredients);
-    this.pushIfDefined('Properties',
+    this.pushIfDefined('Свойства',
       this.product.description.properties);
-    this.pushIfDefined('Directions',
+    this.pushIfDefined('Применение',
       this.product.description.directions)
   }
 

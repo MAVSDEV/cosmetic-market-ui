@@ -43,7 +43,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { ContactUsComponent } from './components/shared/contact-us/contact-us.component';
 import { ProductActionsComponent } from './components/store/shared/product-actions/product-actions.component';
-import { ProductsBreadcrumbComponent } from './components/store/products/products-breadcrumb/products-breadcrumb.component';
+import { ProductsBreadcrumbComponent } from './components/store/shared/products-breadcrumb/products-breadcrumb.component';
 import { CategoryService } from "./services/category.service";
 import { WidgetsComponent } from './components/store/products/widgets/widgets.component';
 import { BestsellersComponent } from './components/dashboard/bestsellers/bestsellers.component';

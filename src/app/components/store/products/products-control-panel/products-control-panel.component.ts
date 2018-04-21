@@ -13,9 +13,9 @@ export class ProductsControlPanelComponent implements OnInit {
   @Input() itemsCount: number = 0;
 
   @Input('sortOptions') sortOptions: SortOption[] = [
-    {id: 'name', name: 'Name'},
-    {id: 'category', name: 'Category'},
-    {id: 'newItem', name: 'New Item'}
+    {id: 'name', name: 'Имя'},
+    /*{id: 'category', name: 'Category'},
+    {id: 'newItem', name: 'New Item'}*/
   ];
 
   @Input('sortOption') selectedSortOption: string = 'name';

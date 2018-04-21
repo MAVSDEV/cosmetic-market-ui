@@ -6,6 +6,9 @@
   margin-bottom: 0;
 }
 
+.products-breadcrumb a {
+  margin-left: 2px;
+}
 /deep/ .products-breadcrumb a{
   color:#2d2d2d;
   text-decoration:none

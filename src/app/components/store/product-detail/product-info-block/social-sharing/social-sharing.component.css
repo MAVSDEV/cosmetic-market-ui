@@ -38,7 +38,7 @@ a:focus, a:hover {
   text-transform: uppercase;
   width: 70px;
   font-size: 13px;
-  font-weight: normal;
+  font-weight: 600;
   color: #575757;
 }
 

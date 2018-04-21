@@ -57,7 +57,8 @@ export class ProductsComponent implements OnInit {
   }
 
   getStartItemIndex(): number {
-    return this.calculatePageItemIndex(this.filterState.page) + 1;
+    const pageIndex = this.calculatePageItemIndex(this.filterState.page);
+    return this.productsTotalCount === 0 ? pageIndex : pageIndex  + 1;
   }
 
   getEndItemIndex(): number {

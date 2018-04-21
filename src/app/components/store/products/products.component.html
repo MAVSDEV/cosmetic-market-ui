@@ -2,12 +2,12 @@
   <div class="container">
     <div class="row">
       <app-products-breadcrumb>
-        <li *ngIf="!isSearch()">Products</li>
-        <li *ngIf="isSearch()">Search results for "{{filterState.widgetsState.searchTerm}}"</li>
+        <li *ngIf="!isSearch()">Продукты</li>
+        <li *ngIf="isSearch()">Результат поиска для "{{filterState.widgetsState.searchTerm}}"</li>
       </app-products-breadcrumb>
       <div *ngIf="isSearch()" class="col-md-12">
         <div id="search-term-banner" class="search-result search-result-top">
-          <p class="search-result-title">Your search results for:</p>
+          <p class="search-result-title">Результат поиска для:</p>
           <p class="search-result-term">"{{filterState.widgetsState.searchTerm}}"</p>
         </div>
       </div>
@@ -25,7 +25,7 @@
         <div class="shop-content">
 
           <div *ngIf="isSearch()" class="search-result search-result-bottom">
-            <p class="search-result-title">Your search results for:</p>
+            <p class="search-result-title">Результат поиска для:</p>
             <p class="search-result-term">"{{filterState.widgetsState.searchTerm}}"</p>
           </div>
 

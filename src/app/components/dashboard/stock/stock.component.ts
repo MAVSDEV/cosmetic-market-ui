@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {DashboardService} from '../../../services/dashboard.service';
+import {Product} from "../../../models/product";
 
 @Component({
   selector: 'app-stock',
@@ -8,10 +9,27 @@ import {DashboardService} from '../../../services/dashboard.service';
 })
 export class StockComponent implements OnInit {
 
-  constructor(private dashboardService: DashboardService) { }
+  _products: Product[] = [];
+
+  productsInitialized: boolean = false;
+
+  constructor(private dashboardService: DashboardService ) { }
 
   ngOnInit() {
-    this.dashboardService.runCarousel('stock-slider');
+  }
+
+  get products() {
+    return this._products;
+  }
+
+  @Input()
+  set products(products: Product[]) {
+    if(!this.productsInitialized && products.length > 0) {
+      this._products = products;
+      this.productsInitialized = true;
+      setTimeout(() => this.dashboardService
+        .runCarousel('stock-slider'));
+    }
   }
 
 }

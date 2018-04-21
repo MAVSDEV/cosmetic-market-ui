@@ -21,7 +21,7 @@
       <div class="container">
         <div class="row">
           <div class="col-xl-12">
-            <div class="wow bounceInDown" data-wow-delay="0.4s">
+            <div class="wow bounceInDown" data-wow-delay="0.3s">
               <div class="section-heading">
                 <h2>О нас</h2>
                 <p><span>Aloe Plus Lanzarote</span> – небольшая испанская компания по производству натуральной
@@ -93,7 +93,7 @@
       <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.2s">
         <div class="about-col">
           <div class="img">
-            <img src="assets/img/about-vision.jpg" alt="" class="img-fluid">
+            <img src="assets/img/about-success.jpg" alt="" class="img-fluid">
             <div class="icon"><i class="ion-android-bulb"></i></div>
           </div>
           <h2 class="title"><a href="#">Успех</a></h2>
@@ -117,7 +117,7 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-12">
-          <div class="wow bounceInDown" data-wow-delay="0.4s">
+          <div class="wow bounceInDown" data-wow-delay="0.3s">
             <div class="section-heading">
               <h2>Продукция</h2>
               <div>
@@ -125,9 +125,9 @@
                   <li class="nav-item">
                     <a class="nav-link active" data-toggle="pill" href="#bestsellers">Бестселлеры</a>
                   </li>
-                  <li class="nav-item">
+                  <!--<li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#sets">Наборы</a>
-                  </li>
+                  </li>-->
                   <li class="nav-item">
                     <a class="nav-link" data-toggle="pill" href="#stock">Акции</a>
                   </li>
@@ -147,13 +147,13 @@
     </div>
     <div class="tab-content">
       <div class="container-fluid active drivers-main tab-pane" id="bestsellers">
-        <app-bestsellers [products]="products"></app-bestsellers>
+        <app-bestsellers [products]="bestsellerProducts"></app-bestsellers>
       </div>
-      <div class="container-fluid drivers-main tab-pane" id="sets">
+      <!-- <div class="container-fluid drivers-main tab-pane" id="sets">
         <app-sets style="height: 100%;"></app-sets>
-      </div>
+      </div> -->
       <div class="container-fluid drivers-main tab-pane" id="stock">
-        <app-stock></app-stock>
+        <app-stock [products]="stockProducts"></app-stock>
       </div>
     </div>
   </div>
@@ -186,7 +186,7 @@
       <p class="category-list-description">Средства для ухода за лицом и телом для женщин.
         Сделаны на основе натуральных ингредиентов.</p>
       <p class="category-list-footer">
-        <a routerLink="/products" class="btn">Подробнее</a>
+        <a routerLink="/products" class="btn">магазин</a>
       </p>
     </div>
     <div class="col-xl-3 col-md-6 col-lg-3 col-12 category">
@@ -196,7 +196,7 @@
       <p class="category-list-description">Средства для ухода за лицом и телом для мужчин.
         Сделаны на основе натуральных ингредиентов.</p>
       <p class="category-list-footer">
-        <a routerLink="/products" [queryParams]="{filter: 'Для мужчин'}" class="btn">Подробнее</a>
+        <a routerLink="/products" [queryParams]="{filter: 'Для мужчин'}" class="btn">магазин</a>
       </p>
     </div>
     <div class="col-xl-3 col-md-6 col-lg-3 col-12 category">
@@ -206,7 +206,7 @@
       <p class="category-list-description">Средства для ухода за лицом и телом для детей.
         Сделаны на основе натуральных ингредиентов.</p>
       <p class="category-list-footer">
-        <a routerLink="/products" [queryParams]="{filter: 'Для детей'}" class="btn">Подробнее</a>
+        <a routerLink="/products" [queryParams]="{filter: 'Для детей'}" class="btn">магазин</a>
       </p>
     </div>
     <div class="col-xl-3 col-md-6 col-lg-3 col-12 category">
@@ -216,7 +216,7 @@
       <p class="category-list-description">Средства для дома и животных сделаны на основе натуральных ингредиентов.
       </p>
       <p class="category-list-footer">
-        <a routerLink="/products" [queryParams]="{filter: 'Для дома'}" class="btn">Подробнее</a>
+        <a routerLink="/products" [queryParams]="{filter: 'Для дома'}" class="btn">магазин</a>
       </p>
     </div>
   </div>
@@ -267,13 +267,9 @@
           <address>
             <strong>Мы в социальных сетях:</strong><br>
             <ul class="company-social">
-              <li class="social-facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i></a>
+              <li class="social-facebook"><a href="https://www.facebook.com/aloelanzerotebelarus" target="_blank"><i class="fa fa-facebook"></i></a>
               </li>
-              <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-              </li>
-              <li class="social-dribble"><a href="#" target="_blank"><i class="fa fa-dribbble"></i></a>
-              </li>
-              <li class="social-google"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a>
+              <li class="social-instagram"><a href="https://www.instagram.com/aloe_lanzarote_belarus" target="_blank"><i class="fa fa-instagram"></i></a>
               </li>
             </ul>
           </address>

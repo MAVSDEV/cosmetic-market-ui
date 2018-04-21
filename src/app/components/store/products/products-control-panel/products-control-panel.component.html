@@ -2,16 +2,17 @@
   <div class="shop-option box-shadow mb-30 clearfix">
     <!-- showing -->
     <div class="showing f-left text-left">
-      <span>
-        Showing : {{startItemsIndex | number:'2.0-0'}}-{{endItemsIndex | number:'2.0-0'}} of {{itemsCount}}.
+      <span class="f-weight-600">
+        Показано : {{startItemsIndex | number:'2.0-0'}}-{{endItemsIndex | number:'2.0-0'}} из {{itemsCount}}.
       </span>
     </div>
     <!-- short-by -->
     <div class="short-by f-left text-center">
-      <span>Sort by :</span>
+      <span class="f-weight-600">Сортировать по :</span>
       <select #sortOptionsSelect
               (change)="selectSortOption(sortOptionsSelect.value)"
-              title="Sort by :">
+              title="Sort by :"
+              class="f-weight-600">
         <option *ngFor="let option of sortOptions"
                 [value]="option.id"
                 [selected]="isSelectedSortOption(option.id)">

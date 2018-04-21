@@ -159,15 +159,20 @@ li:focus, li:hover {
 
 .description-tab li {
   display: inline-block;
-  margin-right: 6%;
   cursor: pointer;
 }
+
+.description-tab li:not(.last) {
+  margin-right: 6%;
+}
+
 .description-tab li a {
   display: block;
   font-weight: 600;
   line-height: 20px;
   text-transform: uppercase;
   color: #575757;
+  font-family: sans-serif;
 }
 .description-tab li.active a {
   opacity: 1;

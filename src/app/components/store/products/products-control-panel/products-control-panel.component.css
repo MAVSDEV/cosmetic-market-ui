@@ -33,8 +33,10 @@
 }
 .short-by > span {
   margin-right: 10px;
+  color: #999999;
+  line-height: 30px;
 }
-.showing span {
+.showing > span {
   color: #999999;
   display: block;
   line-height: 30px;

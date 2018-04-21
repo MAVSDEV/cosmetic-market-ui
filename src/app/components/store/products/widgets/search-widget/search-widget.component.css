@@ -9,6 +9,7 @@
   margin-bottom: 0;
   padding-right: 50px;
   color: #5d5d5d;
+  font-size: 15px;
 }
 
 .widget-search .search-button {
@@ -160,7 +161,7 @@ input[type="text"]:focus {
 
 .error {
   position: absolute;
-  top: -2.0em;
+  top: -3.5em;
   left: 0;
   padding: .2em 1em .1em;
   background-color: #f66;

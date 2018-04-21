@@ -2,9 +2,9 @@
   <form [formGroup]="searchForm" (submit)="onSubmit()" novalidate>
 
     <input (focus)="onSearchFieldFocus()" (blur)="onSearchFieldBlur()" formControlName="searchField" type="text"
-           class="search-field"
+           class="search-field f-weight-600"
            placeholder="Поиск...">
-    <span *ngIf = "searchField.errors?.minlength" class="error">Please type in at least {{this.searchField.errors.minlength.requiredLength}} letters...</span>
+    <span *ngIf = "searchField.errors?.minlength" class="error">Пожалуйста введите хотя бы {{this.searchField.errors.minlength.requiredLength}} буквы...</span>
     <button #searchButton type="submit" class="search-button"><i class="zmdi zmdi-search"></i></button>
     <span *ngIf="loading" class="search-spinner">
       <img src="assets/img/loading.gif">
