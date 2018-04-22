@@ -54,6 +54,8 @@ import {ScrollService} from "./services/scroll.service";
 import {CollapseService} from "./services/collapse.service";
 import {AuthGuard} from "./guards/auth/auth-guard.service";
 import {AuthenticationService} from "./services/authentication.service";
+import {AlertService} from "./services/alert.service";
+import { AlertMessageComponent } from './components/shared/alert-message/alert-message.component';
 
 @NgModule({
   //todo separate on several modules
@@ -94,7 +96,8 @@ import {AuthenticationService} from "./services/authentication.service";
     ContactUsComponent,
     ProductActionsComponent,
     ProductsBreadcrumbComponent,
-    WidgetsComponent
+    WidgetsComponent,
+    AlertMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +117,7 @@ import {AuthenticationService} from "./services/authentication.service";
     NgbModule.forRoot()
   ],
   providers: [ProductService, CategoryService, Logger, DashboardService, ScrollService, CollapseService, AuthenticationService,
-    AuthGuard],
+    AlertService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

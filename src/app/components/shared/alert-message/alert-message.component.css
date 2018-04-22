@@ -1,0 +1,15 @@
+#alert-block {
+  position: fixed;
+  z-index: 3000;
+  width:100%;
+  top: 100px;
+}
+
+#alert-block.stick-to-top {
+  top: 0;
+}
+
+#alert-block.menu-collapsed:not(.stick-to-top) {
+  top: 51px;
+}
+

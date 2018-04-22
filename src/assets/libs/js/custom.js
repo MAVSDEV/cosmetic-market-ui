@@ -6,9 +6,11 @@
 	$(window).scroll(function() {
 		if ($(".navigation-bar").offset().top > 50) {
 			$(".navigation-bar-fixed-top").addClass("top-nav-collapse");
+      $("#alert-block").addClass("menu-collapsed");
             resizeLogo();
 		} else {
 			$(".navigation-bar-fixed-top").removeClass("top-nav-collapse");
+      $("#alert-block").removeClass("menu-collapsed");
             resizeLogo();
 		}
 	});
