@@ -56,6 +56,7 @@ import {AuthGuard} from "./guards/auth/auth-guard.service";
 import {AuthenticationService} from "./services/authentication.service";
 import {AlertService} from "./services/alert.service";
 import { AlertMessageComponent } from './components/shared/alert-message/alert-message.component';
+import {VideoService} from "./services/video.service";
 
 @NgModule({
   //todo separate on several modules
@@ -117,7 +118,7 @@ import { AlertMessageComponent } from './components/shared/alert-message/alert-m
     NgbModule.forRoot()
   ],
   providers: [ProductService, CategoryService, Logger, DashboardService, ScrollService, CollapseService, AuthenticationService,
-    AlertService, AuthGuard],
+    AlertService, VideoService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
