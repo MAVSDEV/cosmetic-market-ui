@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ReactiveFormsBaseClass} from '../shared/classes/reactive-forms.base.class';
 import {ProductService} from "../../services/product.service";
 import {CategoryService} from "../../services/category.service";
+import {ProductsTableComponent} from "./products-table/products-table.component";
 
 declare var $: any;
 
@@ -17,7 +18,10 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   photo: any;
   categories: Array<object>;
   activeType: string | null;
-  productIdForDelete: number | null;
+  productId: number | null;
+  displayedMainPhoto: any;
+
+  @ViewChild(ProductsTableComponent) productsTable: ProductsTableComponent;
 
   constructor(private fb: FormBuilder, private productService: ProductService,
               private categoryService: CategoryService) {
@@ -97,9 +101,9 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
       );
   }
 
-  onSave(){
+  onSave() {
     if (!this.productForm.valid || !this.photo) {
-      alert('Login data is invalid, please check it.');
+      alert('Product data is invalid, please check it.');
       return;
     }
     const formObject = this.productForm.value;
@@ -124,31 +128,46 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   }
 
   onAddNewProduct(productData) {
-    let imageData:FormData = new FormData();
+    let imageData: FormData = new FormData();
     imageData.append('imageFile', this.photo);
 
     this.productService.addProduct(productData)
       .subscribe(result => {
-          console.log(result);
-          this.productService.addPhotoToProduct(result.id, imageData)
-            .subscribe(result => {
-                console.log(result);
-              }
-            );
+          if (result.id) {
+            this.productService.addPhotoToProduct(result.id, imageData)
+              .subscribe(result => {
+                  alert('Product was created');
+                  $('#addProduct').modal('hide');
+                  this.clearForm();
+                  this.productsTable.getProducts(() => {
+                    this.productsTable.loadProductsTable();
+                  })
+                }
+              );
+          } else {
+            alert('Something was wrong! Try again!')
+          }
         }
       );
   }
 
   onFileChange(event) {
     this.photo = event.target.files[0];
+    event.target.value = [];
+    const fr = new FileReader();
+    fr.onload = () => {
+      this.displayedMainPhoto = fr.result;
+    };
+    fr.readAsDataURL(this.photo);
   }
 
-  getProductIdForDelete(id: number){
+  getproductId(id: number) {
     $('#messageBoxModal').modal('show');
-    this.productIdForDelete = id;
+    this.productId = id;
   }
 
-  getProductData(data: object){
+  getProductData(data: object) {
+    this.productId = data['id'];
     this.activeType = 'edit';
     this.productForm.patchValue({
       name: data['name'],
@@ -162,21 +181,47 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
       directions: data['description']['directions'],
       category: data['productCategory']['name']
     });
+    this.photo = this.displayedMainPhoto = data['mainImage'];
     $('#addProduct').modal('show');
   }
 
-  editProduct(data){
-    console.log(data);
-  }
-
-  deleteProduct(){
-    console.log(this.productIdForDelete);
-    if(this.productIdForDelete){
-      this.productService.deleteProduct(this.productIdForDelete)
-        .subscribe(result => {
-          this.productIdForDelete = null;
+  editProduct(data) {
+    data['id'] = this.productId;
+    this.productService.updateProduct(data).subscribe(result => {
+      if(typeof this.photo == 'object'){
+        let imageData: FormData = new FormData();
+        imageData.append('imageFile', this.photo);
+        this.productService.addPhotoToProduct(this.productId, imageData)
+          .subscribe(result => {
+            alert('Product was updated');
+            this.productsTable.getProducts(() => {
+              this.productsTable.loadProductsTable();
+            });
+            $('#addProduct').modal('hide');
+            this.productId = null;
           });
-    }
-
+      }
+    });
   }
+
+  deleteProduct() {
+    if (this.productId) {
+      this.productService.deleteProduct(this.productId)
+        .subscribe(result => {
+          alert('Product was deleted');
+          this.productsTable.getProducts(() => {
+            this.productsTable.loadProductsTable();
+          });
+          this.productId = null;
+        });
+    }
+  }
+
+  clearForm() {
+    this.photo = null;
+    this.displayedMainPhoto = null;
+    this.productForm.reset();
+    this.productId = null;
+  }
+
 }

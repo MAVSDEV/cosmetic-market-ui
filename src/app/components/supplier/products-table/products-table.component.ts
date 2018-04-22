@@ -9,8 +9,8 @@ declare var $: any;
 })
 export class ProductsTableComponent implements OnInit {
   listOfProducts: Array<any> = [];
-  private tableWidget: any;
-  private productsTable: any;
+  public tableWidget: any;
+  public productsTable: any;
   public selectedId: any;
 
   @Output() editData: EventEmitter<object> = new EventEmitter<object>();
@@ -37,7 +37,7 @@ export class ProductsTableComponent implements OnInit {
       columns: [
         {title: 'Photo',
           data: 'mainImage',
-          'bSortable': false,
+          sortable: false,
           'mRender': function (data) {
             return '<img style="height: 80px; width: auto;" src="' + data + '" />';
           }},

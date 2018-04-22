@@ -9,7 +9,7 @@
           <button id="button-create" type="button" class="btn btn-primary pull-right" data-toggle="modal"
                   data-target="#addProduct" (click)="activeType='create'">+</button>
         </div>
-        <app-products-table (deleteId)="getProductIdForDelete($event)"
+        <app-products-table (deleteId)="getproductId($event)"
                             (editData)="getProductData($event)"></app-products-table>
       </div>
     </div>
@@ -19,7 +19,7 @@
 </section>
 
 <!-- The Modal -->
-<div class="modal fade" id="addProduct">
+<div class="modal fade" id="addProduct" data-keyboard="false" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -38,7 +38,11 @@
             <div class="form-group">
               <label class="col-md-3 col-xs-12 control-label pull-left">Фото:</label>
               <div class="col-md-7 col-xs-12">
-                <input type="file" class="input-button" title="" (change)="onFileChange($event)">
+                <input type="file" class="input-button" title="" (change)="onFileChange($event)"
+                       style="width: 120px;">
+                <div *ngIf="displayedMainPhoto" style="margin-top: 5px">
+                  <img src="{{displayedMainPhoto}}" height="100px" width="auto">
+                </div>
               </div>
             </div>
 
@@ -182,7 +186,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button class="btn btn-default" data-dismiss="modal" (click)="activeType=null">Cancel</button>
+        <button class="btn btn-default" data-dismiss="modal" (click)="clearForm()" (click)="activeType=null">Cancel</button>
         <button class="btn btn-default btn-lg btn-logout" (click)="onSave()">Save</button>
       </div>
 
@@ -204,7 +208,7 @@
           <a class="btn btn-yes" data-dismiss="modal"
              (click)="deleteProduct()">Yes</a>
           <button class="btn" data-dismiss="modal"
-          (click)="productIdForDelete=null">No</button>
+          (click)="productId=null">No</button>
         </div>
       </div>
     </div>
