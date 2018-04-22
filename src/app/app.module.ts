@@ -52,6 +52,8 @@ import { StockComponent } from './components/dashboard/stock/stock.component';
 import {DashboardService} from './services/dashboard.service';
 import {ScrollService} from "./services/scroll.service";
 import {CollapseService} from "./services/collapse.service";
+import {AuthGuard} from "./guards/auth/auth-guard.service";
+import {AuthenticationService} from "./services/authentication.service";
 
 @NgModule({
   //todo separate on several modules
@@ -111,7 +113,8 @@ import {CollapseService} from "./services/collapse.service";
     ),*/
     NgbModule.forRoot()
   ],
-  providers: [ProductService, CategoryService, Logger, DashboardService, ScrollService, CollapseService],
+  providers: [ProductService, CategoryService, Logger, DashboardService, ScrollService, CollapseService, AuthenticationService,
+    AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

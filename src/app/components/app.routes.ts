@@ -5,9 +5,10 @@ import {DASHBOARD_ROUTES} from "./dashboard/dashboard.routes";
 import {STORE_ROUTES} from "./store/store.routes";
 import {SupplierComponent} from "./supplier/supplier.component";
 import {SUPPLIER_ROUTES} from "./supplier/supplier.routes";
+import {AuthGuard} from "../guards/auth/auth-guard.service";
 
 export const APP_ROUTES: Routes = [
   { path: '', component: DashboardComponent, children: DASHBOARD_ROUTES, data: { menuItem: 'main', logo: 'white_logo'} },
   { path: '', component: StoreComponent, children: STORE_ROUTES, data: { menuItem: 'store', logo: 'green_logo'} },
-  { path: 'supplier', component: SupplierComponent, children: SUPPLIER_ROUTES, data: { menuItem: 'supplier', logo: 'green_logo'}  }
+  { path: 'supplier', component: SupplierComponent, canActivate: [AuthGuard], children: SUPPLIER_ROUTES, data: { menuItem: 'supplier', logo: 'green_logo'}  }
 ];
