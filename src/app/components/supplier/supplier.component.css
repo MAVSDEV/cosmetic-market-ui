@@ -1800,7 +1800,7 @@ article.single-post p {
 }
 
 #addProduct .modal-content {
-  width: 700px;
+  max-width: 700px;
 }
 
 #button-create{
@@ -1856,4 +1856,10 @@ article.single-post p {
 
 .btn-yes{
   background-color: #848484;
+}
+
+@media screen and (max-width: 600px) {
+  .form-group{
+    display: block;
+  }
 }

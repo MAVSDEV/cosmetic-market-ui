@@ -80,6 +80,21 @@ export class ProductService extends BaseService {
     );
   }
 
+  /** PUT: add additional image to the product on the server */
+  addAdditionalPhotosToProduct (id: number, file: any): Observable<any> {
+    const url = `${this.productsUrl}/${id}/otherImages`;
+
+    let httpHeaders = new HttpHeaders();
+    httpHeaders.append('Content-Type', 'false');
+    httpHeaders.append('processData', 'false');
+    let headers = { headers: httpHeaders };
+
+    return this.http.put(url, file, headers).pipe(
+      tap(_ => this.log(`added otherImages to product!`)),
+      catchError(this.handleError<any>('addAdditionalPhotosToProduct'))
+    );
+  }
+
   /** GET products whose name contains search term */
   autocompleteName(term: string): Observable<Product[]> {
     if (!term.trim()) {

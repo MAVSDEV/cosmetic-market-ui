@@ -20,6 +20,10 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   activeType: string | null;
   productId: number | null;
   displayedMainPhoto: any;
+  displayedAdditionalPhotos: Array<any> = [];
+  additionalPhotos: any = [];
+  deletedPhoto: any = [];
+  infoMessage: string | null;
 
   @ViewChild(ProductsTableComponent) productsTable: ProductsTableComponent;
 
@@ -102,8 +106,9 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
   }
 
   onSave() {
+    $('#infoBoxModal').modal('show');
     if (!this.productForm.valid || !this.photo) {
-      alert('Product data is invalid, please check it.');
+      this.infoMessage = 'Product data is invalid, please check it.';
       return;
     }
     const formObject = this.productForm.value;
@@ -123,30 +128,42 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
         name: formObject.category
       }
     };
-    this.activeType == 'create' ? this.onAddNewProduct(newProductObj) : this.editProduct(newProductObj);
+    this.activeType == 'create' ? this.onAddNewProduct(newProductObj)
+      : this.editProduct(newProductObj);
 
   }
 
   onAddNewProduct(productData) {
     let imageData: FormData = new FormData();
+    let otherImageData: FormData = new FormData();
     imageData.append('imageFile', this.photo);
+    this.additionalPhotos.forEach((elem) => {
+      otherImageData.append('imageFile', elem);
+    });
 
     this.productService.addProduct(productData)
       .subscribe(result => {
-          if (result.id) {
-            this.productService.addPhotoToProduct(result.id, imageData)
+        if(result){
+          let newProductId = result.id;
+          if (newProductId) {
+            this.productService.addPhotoToProduct(newProductId, imageData)
               .subscribe(result => {
-                  alert('Product was created');
-                  $('#addProduct').modal('hide');
-                  this.clearForm();
-                  this.productsTable.getProducts(() => {
-                    this.productsTable.loadProductsTable();
-                  })
+                  this.productService.addAdditionalPhotosToProduct(newProductId, otherImageData)
+                    .subscribe(result => {
+                        this.infoMessage = 'Product was created';
+                        $('#addProduct').modal('hide');
+                        this.clearForm();
+                        this.productsTable.getProducts(() => {
+                          this.productsTable.loadProductsTable();
+                        })
+                      }
+                    );
                 }
               );
           } else {
-            alert('Something was wrong! Try again!')
+            this.infoMessage = 'Something was wrong! Try again!';
           }
+        }
         }
       );
   }
@@ -182,6 +199,7 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
       category: data['productCategory']['name']
     });
     this.photo = this.displayedMainPhoto = data['mainImage'];
+    this.displayedAdditionalPhotos = data['otherImages'] ? data['otherImages'] : [];
     $('#addProduct').modal('show');
   }
 
@@ -189,26 +207,67 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
     data['id'] = this.productId;
     this.productService.updateProduct(data).subscribe(result => {
       if(typeof this.photo == 'object'){
-        let imageData: FormData = new FormData();
-        imageData.append('imageFile', this.photo);
-        this.productService.addPhotoToProduct(this.productId, imageData)
-          .subscribe(result => {
-            alert('Product was updated');
-            this.productsTable.getProducts(() => {
-              this.productsTable.loadProductsTable();
-            });
-            $('#addProduct').modal('hide');
-            this.productId = null;
+        this.uploadImg(() => {
+          this.updateImgs(() => {
+            this.editSuccess();
           });
+
+        });
+      } else {
+        this.updateImgs(() => {
+          this.editSuccess();
+        });
       }
     });
   }
 
+  uploadImg(callback){
+    let imageData: FormData = new FormData();
+    imageData.append('imageFile', this.photo);
+    this.productService.addPhotoToProduct(this.productId, imageData)
+      .subscribe(result => {
+        callback();
+      });
+  }
+
+  updateImgs(callback){
+    let appendData = (callback) => {
+      let imageData: FormData = new FormData();
+      this.deletedPhoto.forEach((elem) => {
+        if(elem.indexOf('http') != -1){
+          imageData.append('deletedImages', elem);
+        }
+      });
+      this.additionalPhotos.forEach((elem) => {
+        imageData.append('imageFile', elem);
+      });
+      callback(imageData);
+    };
+
+    appendData((data) => {
+      this.productService.addAdditionalPhotosToProduct(this.productId, data)
+        .subscribe(result => {
+          callback();
+        });
+    });
+  }
+
+  editSuccess(){
+    this.infoMessage = 'Product was updated';
+    this.productsTable.getProducts(() => {
+      this.productsTable.loadProductsTable();
+    });
+    this.clearForm();
+    $('#addProduct').modal('hide');
+    this.productId = null;
+  }
+
   deleteProduct() {
+    $('#infoBoxModal').modal('show');
     if (this.productId) {
       this.productService.deleteProduct(this.productId)
         .subscribe(result => {
-          alert('Product was deleted');
+          this.infoMessage = 'Product was deleted';
           this.productsTable.getProducts(() => {
             this.productsTable.loadProductsTable();
           });
@@ -222,6 +281,47 @@ export class SupplierComponent extends ReactiveFormsBaseClass implements OnInit 
     this.displayedMainPhoto = null;
     this.productForm.reset();
     this.productId = null;
+    this.displayedAdditionalPhotos = [];
+    this.additionalPhotos = [];
+    this.deletedPhoto = [];
   }
 
+  public onUpdateFiles(result) {
+    const tgt = result.target || window.event.srcElement,
+      files = tgt['files'];
+    const filesArr = Array.prototype.slice.call(files);
+    if (FileReader && files && files.length) {
+      filesArr.forEach((i) => {
+        const fr = new FileReader();
+        fr.onload = () => {
+          this.additionalPhotos.push(i);
+          this.displayedAdditionalPhotos.push(fr.result);
+        };
+        fr.readAsDataURL(i);
+      });
+    }
+    result.target.value = [];
+  }
+
+  deleteProductPhoto(event){
+    this.deletedPhoto.push(event.target.src);
+    let find = false;
+      this.additionalPhotos.forEach((elem, i) => {
+        const fr = new FileReader();
+        fr.onload = () => {
+          if(fr.result == event.target.src && !find) {
+            this.additionalPhotos.splice(i, 1);
+            find = true;
+          }
+        };
+        fr.readAsDataURL(elem);
+      });
+
+    this.displayedAdditionalPhotos.splice(this.displayedAdditionalPhotos.indexOf(event.target.src), 1);
+  }
+
+  closeModal(){
+    this.infoMessage = null;
+    $('#infoBoxModal').modal('hide');
+  }
 }

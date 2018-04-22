@@ -36,8 +36,8 @@
           <div class="form-horizontal col-lg-12">
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label pull-left">Фото:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label pull-left">Фото:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <input type="file" class="input-button" title="" (change)="onFileChange($event)"
                        style="width: 120px;">
                 <div *ngIf="displayedMainPhoto" style="margin-top: 5px">
@@ -47,8 +47,21 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label pull-left">Наименование:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4  col-md-3 col-xs-12 control-label pull-left">Дополнительные фото:</label>
+              <div class="col-lg-7  col-md-7 col-xs-12">
+                <input type="file" multiple title="" (change)="onUpdateFiles($event)"
+                       style="width: 123px;"/>
+                <div *ngIf="displayedAdditionalPhotos.length != 0" style="margin-top: 5px">
+                  <img *ngFor="let photo of displayedAdditionalPhotos"
+                       src="{{photo}}" height="auto" width="100px" style="padding: 2px"
+                       (click)="deleteProductPhoto($event)" title="Click if you want delete it">
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-lg-4  col-md-3 col-xs-12 control-label pull-left">Наименование:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="name" title="" required>
@@ -60,8 +73,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label pull-left">Описание:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label pull-left">Описание:</label>
+              <div class="col-lg-7  col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="description" title="" required>
@@ -73,8 +86,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Объем:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Объем:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="volume" title="" required>
@@ -86,8 +99,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Категория:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Категория:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <select type="text" class="form-control" formControlName="category" title="" required>
@@ -102,8 +115,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Бренд:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Бренд:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="brand" title="" required>
@@ -115,8 +128,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Детали:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Детали:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="details" title="" required>
@@ -128,8 +141,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Акивные ингредиенты:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Акивные ингредиенты:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="activeIngredients" title="" required>
@@ -141,8 +154,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Рекомендации:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Рекомендации:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="directions" title="" required>
@@ -154,8 +167,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Свойства:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Свойства:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="text" class="form-control" formControlName="properties" title="" required>
@@ -167,8 +180,8 @@
             </div>
 
             <div class="form-group">
-              <label class="col-md-3 col-xs-12 control-label">Cтоимость:</label>
-              <div class="col-md-7 col-xs-12">
+              <label class="col-lg-4 col-md-3 col-xs-12 control-label">Cтоимость:</label>
+              <div class="col-lg-7 col-md-7 col-xs-12">
                 <div class="input-group">
                   <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
                   <input type="number" class="form-control" formControlName="price" onkeydown="javascript: return event.keyCode == 69 || event.keyCode == 188 || event.keyCode == 190
@@ -209,6 +222,23 @@
              (click)="deleteProduct()">Yes</a>
           <button class="btn" data-dismiss="modal"
           (click)="productId=null">No</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="infoBoxModal" class="modal message-box animated fadeIn">
+  <div class="mb-container">
+    <div class="mb-middle">
+      <div class="mb-content">
+        <div *ngIf="!infoMessage">
+          <img src="../../../assets/img/loading.gif" width="150" height="150"/>
+        </div>
+        <div *ngIf="infoMessage">
+          <h2 style="color: white">{{infoMessage}}</h2>
+          <button class="btn btn-default btn-lg btn-logout"
+                  (click)="infoMessage=null" (click)="closeModal()">Ok</button>
         </div>
       </div>
     </div>

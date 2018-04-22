@@ -5,9 +5,9 @@
   </div>
 </div>
 
-<div *ngIf="selectedId">
-  <button (click)="onDelete(selectedId)">Delete</button>
-  <button (click)="onEdit(selectedId)">Edit</button>
+<div *ngIf="selectedId" style="text-align: center">
+  <button class="btn btn-default" (click)="onDelete(selectedId)">Delete</button>
+  <button class="btn btn-default" (click)="onEdit(selectedId)">Edit</button>
 </div>
 
 
